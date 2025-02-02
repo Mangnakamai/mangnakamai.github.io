@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mangnakamai</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="module" src="scripts/main.js" defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="header">
+            <h1>Welcome to <span>Mangnakamai.com</span></h1>
+            <p>New Profits with the Good Old Banners</p>
+        </div>
+        <form id="login-form">
+            <label for="phone">Enter Phone Number</label>
+            <input type="text" id="phone" placeholder="+880XXXXXXXXXX" required>
+            <div id="recaptcha-container"></div>
+            <button type="button" id="send-otp-btn">Send OTP</button>
+        </form>
+        <form id="verify-form" style="display: none;">
+            <label for="otp">Enter OTP</label>
+            <div class="otp-box">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+                <input type="text" maxlength="1" class="otp-input">
+            </div>
+            <button type="button" id="verify-otp-btn">Verify OTP</button>
+        </form>
+        <div id="dashboard" style="display: none;">
+            <h2>Welcome, User!</h2>
+            <p>Your account has been successfully logged in.</p>
+            <button id="logout-btn">Logout</button>
+        </div>
+    </div>
+</body>
+</html>
