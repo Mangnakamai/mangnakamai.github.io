@@ -3,39 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mangnakamai</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <script type="module" src="scripts/main.js" defer></script>
+    <title>Firebase Login</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <div class="header">
-            <h1>Welcome to <span>Mangnakamai.com</span></h1>
-            <p>New Profits with the Good Old Banners</p>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
         </div>
-        <form id="login-form">
-            <label for="phone">Enter Phone Number</label>
-            <input type="text" id="phone" placeholder="+880XXXXXXXXXX" required>
-            <div id="recaptcha-container"></div>
-            <button type="button" id="send-otp-btn">Send OTP</button>
-        </form>
-        <form id="verify-form" style="display: none;">
-            <label for="otp">Enter OTP</label>
-            <div class="otp-box">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-                <input type="text" maxlength="1" class="otp-input">
-            </div>
-            <button type="button" id="verify-otp-btn">Verify OTP</button>
-        </form>
-        <div id="dashboard" style="display: none;">
-            <h2>Welcome, User!</h2>
-            <p>Your account has been successfully logged in.</p>
-            <button id="logout-btn">Logout</button>
+        <!-- Login Form -->
+        <div id="login-container">
+            <form id="login-form">
+                <input type="tel" id="loginPhoneNumber" placeholder="Enter Mobile Number" required>
+                <input type="password" id="loginPassword" placeholder="Enter Password" required>
+                <button type="submit">LOGIN</button>
+            </form>
+            <p>Not registered yet? <span id="register-link">Create new account</span></p>
+        </div>
+
+        <!-- Registration Form (Initially Hidden) -->
+        <div id="form-container" class="hidden">
+            <form id="registration-form">
+                <input type="text" id="fullName" placeholder="Enter Full Name" required>
+                <input type="tel" id="phoneNumber" placeholder="Enter Mobile Number" required>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit">REGISTER</button>
+            </form>
+            <p>Already have an account? <span id="login-link">Login here</span></p>
         </div>
     </div>
+
+    <script src="scripts/main.js"></script>
 </body>
 </html>
