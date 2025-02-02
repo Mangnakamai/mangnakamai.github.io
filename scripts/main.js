@@ -5,13 +5,13 @@ import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "http
 
 // Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBidim0vsUWmj5vZ2tiPfjg2u41BizYW30",
-    authDomain: "mangna-kamak.firebaseapp.com",
-    projectId: "mangna-kamak",
-    storageBucket: "mangna-kamak.firebasestorage.app",
-    messagingSenderId: "952226764486",
-    appId: "1:952226764486:web:083cbe5d1ca4ea7720a9c7",
-    measurementId: "G-TLH6VFEJPR"
+    apiKey: "AIzaSyBAiZ-5p3BwQiL6y5Vr_-U0PY2_c8-6bXg",
+  authDomain: "mangna-kamai.firebaseapp.com",
+  projectId: "mangna-kamai",
+  storageBucket: "mangna-kamai.firebasestorage.app",
+  messagingSenderId: "331448209314",
+  appId: "1:331448209314:web:274f289a8d5671cc546cfb",
+  measurementId: "G-07NYJJKVF3"
 };
 
 // Initialize Firebase
