@@ -1,74 +1,64 @@
-
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-// Firebase configuration
+// Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBAiZ-5p3BwQiL6y5Vr_-U0PY2_c8-6bXg",
-  authDomain: "mangna-kamai.firebaseapp.com",
-  projectId: "mangna-kamai",
-  storageBucket: "mangna-kamai.firebasestorage.app",
-  messagingSenderId: "331448209314",
-  appId: "1:331448209314:web:274f289a8d5671cc546cfb",
-  measurementId: "G-07NYJJKVF3"
+    authDomain: "mangna-kamai.firebaseapp.com",
+    projectId: "mangna-kamai",
+    storageBucket: "mangna-kamai.firebasestorage.app",
+    messagingSenderId: "331448209314",
+    appId: "1:331448209314:web:274f289a8d5671cc546cfb",
+    measurementId: "G-07NYJJKVF3",
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-auth.useDeviceLanguage();
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
-let recaptchaVerifier;
+// Login Form
+document.getElementById("login-form").addEventListener("submit", (e) => {
+    e.preventDefault();
 
-window.onload = () => {
-    recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-        size: 'normal',
-        callback: (response) => {
-            console.log("reCAPTCHA verified");
-        }
-    }, auth);
+    const phoneNumber = document.getElementById("loginPhoneNumber").value;
+    const password = document.getElementById("loginPassword").value;
 
-    document.getElementById("send-otp-btn").addEventListener("click", sendOTP);
-    document.getElementById("verify-otp-btn").addEventListener("click", verifyOTP);
-    document.getElementById("logout-btn").addEventListener("click", logout);
-};
+    // Firebase Authentication
+    const email = `${phoneNumber}@example.com`; // Convert phone to email-like format
+    auth.signInWithEmailAndPassword(email, password)
+        .then(() => alert("Login successful!"))
+        .catch((error) => alert(error.message));
+});
 
-function sendOTP() {
-    const phoneNumber = document.getElementById("phone").value;
-    signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier)
-        .then((confirmationResult) => {
-            window.confirmationResult = confirmationResult;
-            document.getElementById("login-form").style.display = "none";
-            document.getElementById("verify-form").style.display = "block";
-        })
-        .catch((error) => {
-            console.error("Error sending OTP:", error);
-            alert("Failed to send OTP. Please try again.");
-        });
-}
+// Registration Form
+document.getElementById("registration-form").addEventListener("submit", (e) => {
+    e.preventDefault();
 
-function verifyOTP() {
-    let otpCode = "";
-    document.querySelectorAll(".otp-input").forEach(input => otpCode += input.value);
+    const fullName = document.getElementById("fullName").value;
+    const phoneNumber = document.getElementById("phoneNumber").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
 
-    window.confirmationResult.confirm(otpCode)
-        .then((result) => {
-            const user = result.user;
-            document.getElementById("verify-form").style.display = "none";
-            document.getElementById("dashboard").style.display = "block";
-        })
-        .catch((error) => {
-            console.error("Error verifying OTP:", error);
-            alert("Invalid OTP. Please try again.");
-        });
-}
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
 
-function logout() {
-    signOut(auth)
+    // Firebase Authentication
+    const email = `${phoneNumber}@example.com`;
+    auth.createUserWithEmailAndPassword(email, password)
         .then(() => {
-            document.getElementById("dashboard").style.display = "none";
-            document.getElementById("login-form").style.display = "block";
+            alert("Registration successful!");
+            switchToLogin();
         })
-        .catch((error) => console.error("Error logging out:", error));
-}
+        .catch((error) => alert(error.message));
+});
+
+// Switch to Registration Form
+document.getElementById("register-link").addEventListener("click", () => {
+    document.getElementById("login-container").classList.add("hidden");
+    document.getElementById("form-container").classList.remove("hidden");
+});
+
+// Switch to Login Form
+document.getElementById("login-link").addEventListener("click", () => {
+    document.getElementById("form-container").classList.add("hidden");
+    document.getElementById("login-container").classList.remove("hidden");
+});
